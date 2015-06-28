@@ -1,4 +1,5 @@
-# Bash script to execute program for multiple files. 
+# CIS 361 - Homework 5
+## Bash script to execute program for multiple files. 
 The attached zip file, allfiles.zip, contains the 1044 possible undirected graphs of size 7 (Thanks to Professor Jerry Scripps for making these files available).
 
 The names of the files are file0, file1, file2, ..., file1042, file1043.
