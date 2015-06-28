@@ -13,10 +13,17 @@ Once the results file has been created, sort it using the command "sort" and red
 Then use the uniq command on sortedResults with the -c option to count how many entries there are for every possible value. Redirect the output to a file called summary.
 
 This the summary file I calculated with my script:
+
 156 1
+
 708 2
+
 152 3
+
 21 4
+
 5 5
+
 1 6
+
 1 7
