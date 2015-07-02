@@ -7,7 +7,7 @@ if [ -f results ]; then
 fi
 
 # run every file in the folder
-for i in file*; do
+for i in files/*; do
     ./dom < $i >> results
 done
 
