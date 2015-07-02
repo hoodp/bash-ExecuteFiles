@@ -4,10 +4,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <omp.h>
-
 // Count how many 1s there are in the binary
-// representation of a value
+// representaiton of a value
+
 int count1s(unsigned int value) {
  unsigned int mask = 1;
  unsigned int size = sizeof(unsigned int)*8;
@@ -21,7 +20,6 @@ int count1s(unsigned int value) {
  }
  return result;
 }
-
 // Calculate the subset of vertices that
 // is encoded by a particular binary value
 void calcSubset(int *subset,unsigned int value,int n) {
@@ -41,7 +39,7 @@ void calcSubset(int *subset,unsigned int value,int n) {
 // Is this particular subset of vertices a dominating set?
 // Return 1 if it is
 // Return 0 if it is not
-int isDominatingSet(int *subset,int **matrix,int n) 
+int     isDominatingSet(int *subset,int **matrix,int n) 
 {
   int covered[n];
   int i,j;
@@ -51,7 +49,6 @@ int isDominatingSet(int *subset,int **matrix,int n)
     else
       covered[i] = 0;
   }
-
   // Now add to covered, the elements that are adjacent
   // in the graph of the values in the subset
   for(i = 0;i < n;i++) {
@@ -63,17 +60,17 @@ int isDominatingSet(int *subset,int **matrix,int n)
       }
     }
   }
-
   // Now check if all vertices are covered or not
   for(i = 0;i < n;i++) {
     if (covered[i] == 0) {
       return 0;
     }
   }
-
   // If this point is reached, all vertices were covered.
   return 1;
 }
+
+
 
 void printMatrix(int **mat,int size) 
 {
@@ -89,14 +86,14 @@ void printMatrix(int **mat,int size)
 
 int main(void)
 {
+
   int n;
   unsigned int i,j;
-  printf("Please enter the size of the matrix: \n");
+  // printf("Please enter the size of the matrix: \n");
   scanf("%d",&n);
 
   int **matrix;
   matrix = (int **) malloc(n * sizeof(int *));
-
   for(i = 0;i < n;i++) {
     matrix[i] = (int *) malloc(n * sizeof(int));
   }
@@ -106,15 +103,15 @@ int main(void)
       scanf("%d ",&matrix[i][j]);
     }
   }
-
   // Now print the matrix
+
   int sizePowerSet = 1;
   for(i = 0;i < n;i++) {
     sizePowerSet = sizePowerSet*2;
   }
-
   // For debugging: Print the size of the power set
   // printf("The size of the power set is %d\n",sizePowerSet);
+
   // Now go through all the possible elements in the power set
   // except for the empty set
   int smallestDominatingSet = n;
@@ -127,6 +124,6 @@ int main(void)
 	smallestDominatingSet = aux;
     }
   }
-  printf("The smallest dominating set has size %d\n",
+  printf("%d\n",
 	 smallestDominatingSet);
 }
