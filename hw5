@@ -1,0 +1,18 @@
+#!/bin/bash
+gcc domSet.c -o dom
+
+# check if results file exists
+if [ -f results ]; then
+    echo -n "" > results
+fi
+
+# run every file in the folder
+for i in file*; do
+    ./dom < $i >> results
+done
+
+# sort the file & redirect the output 
+sort -n results -o sortedResults
+
+# count number of results for each value
+uniq -c sortedResults summary
