@@ -1,5 +1,6 @@
 # CIS 361 - Homework 5 & 6
 ## Homework 6
+=============
 Modify the script you wrote for Homework 6. Instead of using sort and uniq to produce the count of graphs with a particular value of the dominating set, use an awk script.
 
 Include the instructions for the awk script in your bash script.
@@ -7,6 +8,7 @@ Include the instructions for the awk script in your bash script.
 Generate a png file at the end, using gnuplot. This plot should have the possible values of the size of the dominating set in the X axis and the actual number of graphs with that particular value in the Y axis. Use appropriate labels for the plot.
 
 ## Homework 5
+=============
 ### Bash script to execute program for multiple files. 
 The attached zip file, allfiles.zip, contains the 1044 possible undirected graphs of size 7 (Thanks to Professor Jerry Scripps for making these files available).
 
