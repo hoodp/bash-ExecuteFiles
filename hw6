@@ -11,8 +11,15 @@ for i in files/*; do
     ./dom < $i >> results
 done
 
-# sort the file & redirect the output 
-sort -n results -o sortedResults
+# sorts & counts the results using gawk
+gawk '
+     { 
+          count[$1]++ 
+     }
+     END { 
+          n = asorti(count, sorted)
+          for (i = 1; i <= n; i++) {
+               printf "%i %i\n", count[sorted[i]], sorted[i] > "summary"
+          }
+     } ' results
 
-# count number of results for each value
-uniq -c sortedResults summary
