@@ -19,7 +19,9 @@ gawk '
      END { 
           n = asorti(count, sorted)
           for (i = 1; i <= n; i++) {
-               printf "%i %i\n", count[sorted[i]], sorted[i] > "summary"
+               printf "%i %i\n", sorted[i], count[sorted[i]] > "summary"
           }
      } ' results
 
+# generate graph of results using gnu plot
+gnuplot domSet.gnuplot
