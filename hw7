@@ -28,7 +28,7 @@ for i in {1..32}; do
     if [ ! -z "$is_known" ]; then
 
         # generate the file path
-        filePath="file$((fileNum++))*"
+        filePath="files/file$((fileNum++))*"
 
         # generate the command to run on the remote machine
         ssh $machine 'cd '$pwd'; for i in '$filePath'; do ./domSet < $i >> results; done'
