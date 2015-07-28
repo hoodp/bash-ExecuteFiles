@@ -1,27 +1,53 @@
 #!/bin/bash
-gcc domSet.c -o dom
+gcc domSet.c -o domSet
 
 # check if results file exists
 if [ -f results ]; then
     echo -n "" > results
 fi
 
-# run every file in the folder
-for i in files/*; do
-    ./dom < $i >> results
-done
+# current file number
+fileNum=0
 
-# sorts & counts the results using gawk
-gawk '
-     { 
-          count[$1]++ 
-     }
-     END { 
-          n = asorti(count, sorted)
-          for (i = 1; i <= n; i++) {
-               printf "%i %i\n", sorted[i], count[sorted[i]] > "summary"
-          }
-     } ' results
+# max number of files
+LIMIT=9
+
+# location where files should be located
+pwd=$(pwd)
+
+# start looping through all possible eos machines
+for i in {1..32}; do
+
+    # check if all the files have been run
+    if (( $fileNum > 9 )); then
+
+        # stop searching for eos machines to execute program
+        break
+    fi
+
+    # machine to run files
+    machine="eos$(printf '%02d' $i)"
+
+    # searchs the known hosts file for eos current machine
+    is_known=$(ssh-keygen -l -f ~/.ssh/known_hosts -F $machine)
+
+    # check if the machine is valid
+    if [ ! -z "$is_known" ]; then
+
+        # generate the file path
+        filePath="files/file$((fileNum++))*"
+
+        # generate the command to run on the remote machine
+        ssh $machine 'cd '$pwd'; for i in '$filePath'; do ./domSet < $i >> results; done'
+    fi
+done
+wait
+
+# sort the results file & redirect the ouput
+sort -n results -o sortedResults
+
+# count the number of results for each value
+uniq -c sortedResults summary
 
 # generate graph of results using gnu plot
 gnuplot domSet.gnuplot
