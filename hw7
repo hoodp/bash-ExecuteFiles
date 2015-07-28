@@ -18,13 +18,6 @@ pwd=$(pwd)
 # start looping through all possible eos machines
 for i in {1..32}; do
 
-    # check if all the files have been run
-    if (( $fileNum > 9 )); then
-
-        # stop searching for eos machines to execute program
-        break
-    fi
-
     # machine to run files
     machine="eos$(printf '%02d' $i)"
 
@@ -35,10 +28,17 @@ for i in {1..32}; do
     if [ ! -z "$is_known" ]; then
 
         # generate the file path
-        filePath="files/file$((fileNum++))*"
+        filePath="file$((fileNum++))*"
 
         # generate the command to run on the remote machine
         ssh $machine 'cd '$pwd'; for i in '$filePath'; do ./domSet < $i >> results; done'
+    fi
+
+    # check if all the files have been run
+    if (( $fileNum > 9 )); then
+
+        # stop searching for eos machines to execute program
+        break
     fi
 done
 wait
